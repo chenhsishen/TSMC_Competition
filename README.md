@@ -16,7 +16,7 @@
 - 115GB的資料，從按下執行後，最後大約要花一個多小時跑完。包括資料輸入、合併pattern相似的column、降維，再合併為一個可以建模的檔案。
 - 感謝摯友，帥哥李唐，在這個過程中的教導。
 
-## 3. 建模
+## [3. 建模](https://github.com/chenhsishen/TSMC_Competition/blob/master/Modeliing.md)
 - 建模的目的有兩個：
     - 1. 找出影響良率的Root Cause
     - 2. 預測良率
