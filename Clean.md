@@ -15,7 +15,9 @@ setwd('C:/Users/Desktop/Competition/FDC Data')
 file_name <- list.files('.') #把所有的檔名存在一個list，方便之後直接用lapply
 
 Reduction <- function(x){
-  result <- tryCatch({       #設置除錯
+#################Data Input####################  
+  
+  result <- tryCatch({setwd('C:/Users/Desktop/Competition/FDC Data')       #設置除錯
   raw <- as.data.frame(fread(x))    # 讀檔並轉為資料框
   B_raw <- raw[,-c(1:6)]        #去除不重要的欄位
   },error=function(y) {
@@ -35,9 +37,14 @@ setwd('C:/Users/Desktop/Competition/FDC Data')
 file_name <- list.files('.') #把所有的檔名存在一個list，方便之後直接用lapply
 
 Reduction <- function(x){
-  result <- tryCatch({setwd('C:/Users/Desktop/Competition/FDC Data')       #設置除錯
+
+#################Data Input####################  
+  
+  result <- tryCatch({setwd('C:/Users/Desktop/Competition/FDC Data')       #設置除錯
   raw <- as.data.frame(fread(x))    # 讀檔並轉為資料框
   B_raw <- raw[,-c(1:6)]        #去除不重要的欄位
+  
+#################Variable Merge####################  
   
   L <- list()
   for(i in 1:as.integer(gsub("SVID","",strsplit(colnames(B_raw)[ncol(B_raw),"_"])[[1]][2])){#把欄位名稱中的SVID的編號取出來index
@@ -69,9 +76,14 @@ setwd('C:/Users/Desktop/Competition/FDC Data')
 file_name <- list.files('.') #把所有的檔名存在一個list，方便之後直接用lapply
 
 Reduction <- function(x){
-  result <- tryCatch({setwd('C:/Users/Desktop/Competition/FDC Data')       #設置除錯
+
+#################Data Input####################  
+  
+  result <- tryCatch({setwd('C:/Users/Desktop/Competition/FDC Data')       #設置除錯
   raw <- as.data.frame(fread(x))    # 讀檔並轉為資料框
   B_raw <- raw[,-c(1:6)]        #去除不重要的欄位
+  
+#################Variable Merge####################  
   
   L <- list()
   for(i in 1:as.integer(gsub("SVID","",strsplit(colnames(B_raw)[ncol(B_raw),"_"])[[1]][2])){#把欄位名稱中的SVID的編號取出來index
@@ -87,6 +99,8 @@ Reduction <- function(x){
     colnames(L) <- paste(substring(colnames(B_raw)[1],1,6),'SVID',i,"_",sep="")
   }
   
+ #################PCA#################### 
+  
   pca_cor <- princomp(L,scores=T)
   cum_propor <- cumsum(pca_cor$sdev^2/sum(pca_cor$sdev^2))) #計算每個主成份能解釋的比例
   pc.index <- min(which(com_propor > 0.9)) #找出是到哪一個主成份剛好有超過90%
@@ -98,6 +112,9 @@ Reduction <- function(x){
   y <- NULL})
 return(result)
 }
+
+#################Debuggggg#################### 
+
 fianl_list <- lapply(file_name,function(x) Reduction(x)) #將這個函數執行到包含所有檔名的list
 ```
 
