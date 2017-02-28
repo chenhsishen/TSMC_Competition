@@ -70,4 +70,4 @@ xyf_model <- xyf(train[,-1],train[,1],grid=somgrid(50,50,'hexagonal'))  #somgrid
 xyf_pred <- predict(xyf_model,newdata=test) #也和原本的predict()相容
 ```
 
-##大致上這樣啦！什麼Cross-Validation、計算MAPE之類的粗活，網路上都有很多參考(其實是我忘記截圖......)
+###大致上這樣啦！什麼Cross-Validation、計算MAPE之類的粗活，網路上都有很多參考(其實是沒截到圖...就懶得打了......)
