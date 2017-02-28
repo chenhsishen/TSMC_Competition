@@ -9,7 +9,7 @@
 - 讀檔是很耗時的，尤其是這種特別肥大的檔案。在這邊我們使用```data.table```套件中的```fread()```函數，用有效率的方式讀取檔案。
 - 實際讀取的結果，一個500MB左右的.csv檔(幾萬rows乘上幾千columns)，大約需要花上30秒左右的時間。
 - 值得注意的是，```fread()```讀進來的還不是完整的DataFrame，請記得用```as.Data.frame```轉換。
-```
+```R
 library(data.table)
 setwd('C:/Users/Desktop/Competition/FDC Data')
 file_name <- list.files('.') #把所有的檔名存在一個list，方便之後直接用lapply
@@ -30,7 +30,7 @@ return(result)
 - 透過觀察，我們發現在同一個Stage下，同一個SVID的編號中，不同的step所表現測量的值，不論是數值或是分配都不會相差太多。
 - 因此，把這些特徵相近的欄位進行平均，平均為一個新的欄位，我們認為是可行的做法
 - 沿著欄位名稱的規律去索引，就能得出我們需要的特定欄位的平均；也能確保他能適應不同維度的資料。
-```
+```R
 library(data.table)
 library(plyr)
 setwd('C:/Users/Desktop/Competition/FDC Data')
@@ -69,7 +69,7 @@ return(result)
 ## Principal Component Analysis
 - 選擇用主成份分析將維，我認為是比較好「解釋」的做法，雖然他其實沒有那麼好解釋。
 - 在每個資料集中，選出累積解釋變異能超過90%以上變異的那些主成份，並保留他們的scores作為新的值。
-```
+```R
 library(data.table)
 library(plyr)
 setwd('C:/Users/Desktop/Competition/FDC Data')
