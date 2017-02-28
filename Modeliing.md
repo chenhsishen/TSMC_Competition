@@ -53,9 +53,21 @@ num <- sapply(d,is.numeric) #先把數字的部分留下來，因為需要的文
 b <- d[,num]
 c <- b[,-grep("Yield",colnames(b))] #先從留下數字的資料中，把Yeild的欄位全都拿掉
 y <- d[,grep("Yield",colnames(b))][2]  #再從原始資料中，隨便取一個Yield欄位出來
-raw <- rbind(c,y)  #接著把他們合併起來，就大功告成啦！
+raw <- rbind(y,c)  #接著把他們合併起來，就大功告成啦！
 ```
 
 ###Modeling
 - 終於把資料處理好後，就可以來切分訓練資料、測試資料的routine
 ```R
+raw <- raw[sample(nrow(raw),replace=TRUE),]  #把資料集洗牌打亂
+train <- as.matrix(raw[1:round(nrow(raw)*0.7))  #70%的資料用做訓練，因為神經網絡吃得是matrix，要先轉換一下
+dim(train) <- as.numeric(dim(train)); colnames(train) <- colnames(raw) #但如果欄位名稱不見了，之後也不方便看，所以再貼回來
+test <- as.matrix(raw[round(nrow(raw)*0.7)+1:nrow(raw),])) 
+```
+- 最後就是建立模型啦，使用```kohonen```中的```xyf()```函數，可以建立kohonen神經網路
+```R
+xyf_model <- xyf(train[,-1],train[,1],grid=somgrid(50,50,'hexagonal'))  #somgrid就是設定Self-organizing Map的參數，這邊我們設成50*50
+xyf_pred <- predict(xyf_model,newdata=test) #也和原本的predict()相容
+```
+
+##大致上這樣啦！什麼Cross-Validation、計算MAPE之類的粗活，網路上都有很多參考(其實是我忘記截圖......)
