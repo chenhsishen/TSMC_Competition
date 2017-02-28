@@ -42,6 +42,20 @@ Mer <- function(x){
 final_data <- lapply(file_name,Mer)  ###執行下去就得到整理好的300個資料集，並存放在一個list裡面
 
 d <- final_data[[1]]
-
-
+for(i in 1:300){
+ d <- cbind(d,final_data[[i+1]]  ###最後合併所有的元素
+}
 ```
+- 但大家有沒有發現哪裡怪怪的？每一個元素中都包含了良率的欄位，合併起來就有300個良率的欄位啊！！！！我沒事要那麼多良率的欄位幹嘛！！！
+- 所以必須要再用一小段程式，把這個小小錯誤修正
+```R
+num <- sapply(d,is.numeric) #先把數字的部分留下來，因為需要的文字資訊(包括階段、Chamber等，我們都做在欄位名稱上了)
+b <- d[,num]
+c <- b[,-grep("Yield",colnames(b))] #先從留下數字的資料中，把Yeild的欄位全都拿掉
+y <- d[,grep("Yield",colnames(b))][2]  #再從原始資料中，隨便取一個Yield欄位出來
+raw <- rbind(c,y)  #接著把他們合併起來，就大功告成啦！
+```
+
+###Modeling
+- 終於把資料處理好後，就可以來切分訓練資料、測試資料的routine
+```R
