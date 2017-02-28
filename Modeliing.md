@@ -14,7 +14,6 @@ library(kohonen)
 setwd('C:/Users/Desktop/Competition/FDC Data_New')
 file_name <- list.files('.')
 
-##################Sep###################
 Sep <- function(x){
   a <- as.data.frame(fread(x))  #寫入我們將維過後的檔案
   a <- split(a,a$Chamber.ID)  #將屬於不同Chamber的資料分離出來，存入一個list
