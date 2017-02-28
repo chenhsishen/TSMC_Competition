@@ -1,7 +1,7 @@
 ##建模
 - 雖然在介紹的時候，有說我用了```Lasso Regression```，但由於這邊做出來的結果實在是有點爛，程式碼也沒有「截圖」得很完整，就略過這部分了
 - 還是提醒一下，如果是要做Lasso Regression，記得要用```model.matrix```把類別變數全都轉換為```dummy variables```，才吃得進去
-- 再來是神經網絡，Kohonen，R裡面有個library就叫做kohonen，安裝後直接```library(kohonen)```就可以使用；建模前的整理
+- 再來是神經網絡，Kohonen，R裡面有個library就叫做kohonen，安裝後直接```library(kohonen)```就可以使用
 
 ---
 
