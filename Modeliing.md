@@ -1,11 +1,11 @@
-##建模
+## 建模
 - 雖然在介紹的時候，有說我用了```Lasso Regression```，但由於這邊做出來的結果實在是有點爛，程式碼也沒有「截圖」得很完整，就略過這部分了
 - 還是提醒一下，如果是要做Lasso Regression，記得要用```model.matrix```把類別變數全都轉換為```dummy variables```，才吃得進去
 - 再來是神經網絡，Kohonen，R裡面有個library就叫做kohonen，安裝後直接```library(kohonen)```就可以使用
 
 ---
 
-###Data Preprocess
+### Data Preprocess
 - 由於比賽中有特別提到不同「Chamber」對於良率的影響，所以同一個Stage中，屬於不同Chamber的Data，分開來處理，這邊我是寫了一個```Sep()```函數，來幫我完成這件事情
 ```R
 library(data.table)
@@ -55,7 +55,7 @@ y <- d[,grep("Yield",colnames(b))][2]  #再從原始資料中，隨便取一個Y
 raw <- rbind(y,c)  #接著把他們合併起來，就大功告成啦！
 ```
 
-###Modeling
+### Modeling
 - 終於把資料處理好後，就可以來切分訓練資料、測試資料的routine
 ```R
 raw <- raw[sample(nrow(raw),replace=TRUE),]  #把資料集洗牌打亂
@@ -69,4 +69,4 @@ xyf_model <- xyf(train[,-1],train[,1],grid=somgrid(50,50,'hexagonal'))  #somgrid
 xyf_pred <- predict(xyf_model,newdata=test) #也和原本的predict()相容
 ```
 
-###大致上這樣啦！什麼Cross-Validation、計算MAPE之類的粗活，網路上都有很多參考(其實是沒截到圖...就懶得打了......)
+### 大致上這樣啦！什麼Cross-Validation、計算MAPE之類的粗活，網路上都有很多參考(其實是沒截到圖...就懶得打了......)
